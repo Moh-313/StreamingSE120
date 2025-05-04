@@ -1,92 +1,110 @@
 package mainstreamingplatform;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
-public class UserGUI {
+public class UserGUI extends Application {
 
-    //GUI components
-    private JFrame frame; //frame
+    //GUI Datafields
+    private Label title, userIdLabel, emailLabel, passwordLabel;
+    private TextField idField, emailField, passwordField;
     
-    private JLabel idLabel, emailLabel, passwordLabel;
+
+    private Button loginButton;
+    private User user1;
     
-    private JTextField idField; //userid input field
-    private JTextField emailField; //email inpout field
-    private JTextField passwordField; //password input field
-
-    private JButton loginButton;
     
+    //Method that is called when you launch()
+    @Override
+    public void start(Stage primaryStage) {
+        //App name
+        primaryStage.setTitle("Login Page");
 
-    private User user1;//Link to the User Object
-
-    //No-Arg constructor
-    public UserGUI() {
-
-        //Setting up the frame box
-        frame = new JFrame("Login Page");
-        frame.setSize(450, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Setting up the panel
-        JPanel panel = new JPanel(new GridLayout()); //Create the panel
-        panel.setLayout(null); //Set the panel to null to allow freedom of setting your own bounds
-
-        //Allow the user to input their userId, email, and password
-        idLabel = new JLabel("User ID: ");
-        idLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        idLabel.setBounds(100, 100, 80, 25);
-        panel.add(idLabel);
+        //Creating a grid
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10); //Horizontal gap between componenets
+        grid.setVgap(10); //Vertical gap between components
+        grid.setPadding(new Insets(25, 25, 25, 25)); // Padding in order (top,right,bottom,left)
         
         
-        idField = new JTextField();
-        idField.setBounds(200, 100, 150, 25);
-        panel.add(idField);
-
-        emailLabel = new JLabel("Email: ");
-        emailLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        emailLabel.setBounds(100, 150, 80, 25);
-        panel.add(emailLabel);
+        //Title at the top
+        title = new Label("Welcome! Please Login");
+        title.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        grid.add(title,1,0);
         
+        //Make the label for UserID
+        userIdLabel = new Label("User ID:");
+        userIdLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14)); //Set the font and size
+        grid.add(userIdLabel, 0, 1); // Adds the component to the grid, (column, row)
         
-        emailField = new JTextField();
-        emailField.setBounds(200, 150, 150, 25);
-        panel.add(emailField);
+        //Make the textField for UserId
+        idField = new TextField();
+        grid.add(idField, 1, 1);
 
-        passwordLabel = new JLabel("Password: ");
-        passwordLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        passwordLabel.setBounds(100, 200, 80, 25);
-        panel.add(passwordLabel);
+        emailLabel = new Label("Email:");
+        emailLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        grid.add(emailLabel, 0, 2);
+
+        emailField = new TextField();
+        grid.add(emailField, 1, 2);
+
+        passwordLabel = new Label("Password:");
+        passwordLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        grid.add(passwordLabel, 0, 3);
+
+        passwordField = new TextField();
+        grid.add(passwordField, 1, 3);
         
+        //Make the button to login
+        loginButton = new Button("Login");
+        loginButton.setPrefWidth(100); // Adjust its width to match the components on top
+        grid.add(loginButton, 1, 4);
         
-        passwordField = new JTextField();
-        passwordField.setBounds(200, 200, 150, 25);
-        panel.add(passwordField);
-        
-        loginButton = new JButton("Login: "); //Login button
-        loginButton.setBounds(200, 250, 150, 25);
-        panel.add(loginButton);
+        //setOnAction defines what happens when you clcik the button
+        loginButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String userId = idField.getText();
+                String email = emailField.getText();
+                String password = passwordField.getText();
+                user1 = new User(userId, email, password); //save the fields to the object of the User
+                displayMessage("Login successful, welcome " + userId);
 
-        loginButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent login) {
-
-                String UserId = idField.getText();
-                String Email = emailField.getText();
-                String Password = passwordField.getText();
-
-                User u = new User(UserId, Email, Password);
                 
-                JOptionPane.showMessageDialog(frame,"Login sucessful, Welcome " + UserId);
             }
-            
         });
-        frame.add(panel);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        
+
+        //Make the stage
+        Scene loginPage = new Scene(grid, 450, 400);
+        primaryStage.setScene(loginPage);
+        primaryStage.show(); //call the show method to show the stage
     }
     
-    public User getUser(){
+    public void displayMessage(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+}
+    public User getUser() {
         return user1;
+    }
+
+    //Method to launch the UI
+    public static void launchUI(String[] args) {
+        launch(args);
     }
 }
