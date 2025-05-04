@@ -12,7 +12,7 @@ public class User {
    }
    
    public boolean login(){
-       boolean loggedIn = false;
+       boolean loggedIn = true;
        return loggedIn;
    }
    
