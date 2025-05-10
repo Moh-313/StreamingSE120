@@ -32,19 +32,21 @@ public class UserGUI extends Application {
     @FXML
     private Button loginButton;//Button
     
-    private User user1; //Create and object of the user class
+    private User currentUser; //Create an object of the User class
 
     //Method that is called when you launch()
     @Override
-    public void start(Stage primaryStage) {
-
+    public void start(Stage loginStage) {
+        
+        //Needs to be in a try catch block incase the FXML file is'nt found
         try {
-            Parent loginmenu = FXMLLoader.load(getClass().getResource("LoginFXML.fxml"));
-            //App name
-            Scene scene = new Scene(loginmenu);
-            primaryStage.setTitle("Login Page");
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            Parent loginmenu = FXMLLoader.load(getClass().getResource("LoginFXML.fxml")); //Opens the FXML scenbuilder file
+            
+            //Create the scene (main page)
+            Scene loginScene = new Scene(loginmenu);
+            loginStage.setTitle("Login Page");
+            loginStage.setScene(loginScene);
+            loginStage.show();
             
             
         } catch (Exception e) {
@@ -55,45 +57,73 @@ public class UserGUI extends Application {
     @FXML
     public void initialize(){
         
+        //Decalres what happens when you click the button
         loginButton.setOnAction(event ->{
-            
+        
+            //Gets what the user inputs and saves it
         String UserId = userIdField.getText();
         String Email = emailField.getText();
         String Password = passwordField.getText();
         
-        this.user1 = new User(UserId, Email, Password);
-        displayMessage("Login successful, Welcome " + UserId);
+        this.currentUser = new User(UserId, Email, Password); //Create an object with what the user enetered
+        
+        try {
+            
+            FXMLLoader subscriptionLoader = new FXMLLoader(getClass().getResource("SubscriptionPage.fxml"));
+            Parent subscriptionParent = subscriptionLoader.load();
+            SubscriptionClass subscriptionClass = subscriptionLoader.getController();
+            
+            if (subscriptionClass == null) {
+            displayMessage("Error: Could not get controller for subscription page");
+            return;
+        }
+            subscriptionClass.setUser(currentUser);
+            
+            Stage subscriptionStage = (Stage) loginButton.getScene().getWindow();
+            Scene subscriptionScene = new Scene(subscriptionParent);
+            subscriptionStage.setScene(subscriptionScene);
+        } 
+        
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        //displayMessage("hello");
+        
     });
         
+        //Glow effect when u click the textfield
         emailField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-        if (newValue) { // Field is focused/clicked
+        if (newValue) { 
             emailField.setStyle("-fx-background-color: #2A363F; -fx-border-color: lightgreen; -fx-text-fill: white;");
-        } else { // Field is unfocused/unclicked
+        } else { 
             emailField.setStyle("-fx-background-color: #2A363F; -fx-border-color:  #465058; -fx-text-fill: black;");
         }
     });
         
     userIdField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-        if (newValue) { // Field is focused/clicked
+        if (newValue) { 
             userIdField.setStyle("-fx-background-color: #2A363F; -fx-border-color: lightgreen; -fx-text-fill: white;");
-        } else { // Field is unfocused/unclicked
+        } else { 
             userIdField.setStyle("-fx-background-color: #2A363F; -fx-border-color:  #465058; -fx-text-fill: black;");
         }
     });
     
     passwordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-        if (newValue) { // Field is focused/clicked
+        if (newValue) { 
             passwordField.setStyle("-fx-background-color: #2A363F; -fx-border-color: lightgreen; -fx-text-fill: white;");
-        } else { // Field is unfocused/unclicked
+        } else { 
             passwordField.setStyle("-fx-background-color: #2A363F; -fx-border-color:  #465058; -fx-text-fill: black;");
         }
     });
+    
+    //Makes it so if doesn't hover a textfield automatically on start, and waits for you to click it
      Platform.runLater(() -> {
         userIdField.getParent().requestFocus();
     });
     
 }
     
+    //Setting up the pop up message when you login
     public void displayMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
@@ -102,7 +132,7 @@ public class UserGUI extends Application {
     }
 
     public User getUser() {
-        return user1;
+        return currentUser;
     }
 
     //Method to launch the UI
