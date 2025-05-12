@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="840" prefWidth="1514" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainstreamingplatform.PaymentGUI">
+   <children>
+      <VBox alignment="CENTER" layoutX="357.0" layoutY="223.0" prefHeight="604.0" prefWidth="1000.0" spacing="50.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="257.0" AnchorPane.rightAnchor="257.0" AnchorPane.topAnchor="223.0">
+         <children>
+            
+            <!-- Payment Method Toggle (Scaled up) -->
+            <HBox alignment="CENTER" spacing="70.0">
+               <children>
+                  <RadioButton fx:id="creditCardRadio" selected="true" text="Credit Card" textFill="WHITE">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="paymentMethodGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="paypalRadio" text="PayPal" textFill="WHITE" toggleGroup="$paymentMethodGroup">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </HBox>
+            
+            <!-- Forms Container (Scaled up) -->
+            <VBox alignment="CENTER" prefWidth="800.0" spacing="40.0">
+               <children>
+                  <!-- Credit Card Form -->
+                  <VBox fx:id="creditCardForm" alignment="CENTER" spacing="30.0">
+                     <children>
+                        <StackPane prefHeight="80.0" prefWidth="600.0">
+                           <children>
+                              <TextField fx:id="paypalEmailField" alignment="TOP_LEFT" prefHeight="80.0" prefWidth="600.0" promptText="PayPal Email" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-text-fill: white; -fx-font-size: 24.0;" visible="false">
+                              </TextField>
+                              <TextField fx:id="cardNumberField" prefHeight="80.0" prefWidth="600.0" promptText="Card Number" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-text-fill: white; -fx-font-size: 24.0;">
+                              </TextField>
+                           </children>
+                        </StackPane>
+                        <TextField fx:id="expiryField" prefHeight="80.0" prefWidth="600.0" promptText="MM/YY" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-text-fill: white; -fx-font-size: 24.0;">
+                        </TextField>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            
+            <!-- Amount Display (Scaled up) -->
+            <Label fx:id="amountLabel" style="-fx-padding: 0 0 30 0;" textFill="#6ed9a0">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            
+            <!-- Pay Button (Scaled up) -->
+            <Button fx:id="payButton" prefHeight="80.0" prefWidth="700.0" style="-fx-background-color: #6ed9a0; -fx-text-fill: white; -fx-font-size: 32.0;" text="Pay Now" textFill="#e22c2c">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            
+            <!-- Status Message (Scaled up) -->
+            <Label fx:id="resultLabel" alignment="BOTTOM_CENTER" prefHeight="65.0" prefWidth="600.0" style="-fx-padding: 30 0 0 0;" textFill="#3ae643">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <!-- Title (Scaled up) -->
+      <Text fill="WHITE" layoutX="510.0" layoutY="178.0" text="Select Payment Method:" wrappingWidth="482.1591796875">
+         <font>
+            <Font name="System Bold" size="42.0" />
+         </font>
+      </Text>
+      <Button fx:id="returnHomeButton" layoutX="1243.0" layoutY="780.0" mnemonicParsing="false" style="-fx-background-color: #e22c2c;" text="Return to Homepage" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
