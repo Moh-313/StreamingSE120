@@ -5,6 +5,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*; // for JavaFx controls like buttons RadioButtons etc
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
 public class PaymentGUI implements Initializable {
 
@@ -32,11 +37,17 @@ public class PaymentGUI implements Initializable {
     @FXML
     private Button payButton;
     @FXML
-    private Button returnHomeButton;
-
+    private Button returnHomeButton; 
     //  default price 0 (will change in setAmount based on Subscription plan choice) 
     private double price = 0;
-
+    
+    private User currentUser;
+    private String chosenPlan;
+    
+    public void setUserAndPlan(User user,String plan){
+        this.currentUser = user;
+        this.chosenPlan = plan;
+    }
     //  runs when the payment screen loads 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -77,15 +88,49 @@ public class PaymentGUI implements Initializable {
             //calls validateAndProcessPayment
             boolean success = validateAndProcessPayment();
             // shows if payment worked ot not 
-            resultLabel.setText(success ? "Payment successful!" : "Payment failed");// Label class
-            // set green for success red for failure
-            resultLabel.setStyle(success ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
+            
+            if(success){
+                createNewSubscriber();
+                resultLabel.setText("Payment Successful!");
+                resultLabel.setStyle("-fx-text-fill: green;");
+            }
+            else{
+                resultLabel.setText("Payment Failed");
+                resultLabel.setStyle("-fx-text-fill: red;");
+            }
+            
         } catch (IllegalArgumentException e) {
 
             resultLabel.setText(e.getMessage());
             resultLabel.setStyle("-fx-text-fill: red;");
         }
     }
+    
+    public void createNewSubscriber(){
+        if(currentUser != null && chosenPlan !=null){
+            Subscriber newSubscriber = new Subscriber(currentUser);
+            newSubscriber.subscribe(chosenPlan);
+        
+        
+        try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("StreamingServiceFXML.fxml"));
+                Parent streamingRoot = loader.load();
+                Scene streamingScene = new Scene(streamingRoot);
+
+                // Get the stage from the event
+                Stage stage = (Stage) payButton.getScene().getWindow();
+                stage.setScene(streamingScene);
+                stage.setTitle("Welcome to MainStreaming");
+                stage.show();
+            } catch(Exception e) {
+                resultLabel.setText("error loading streamingServicePage");
+            }
+            }else{
+            resultLabel.setText("missing user infor");
+        }
+    }
+ 
+    
 
     // handles the payment method that u chose
     private boolean validateAndProcessPayment() {

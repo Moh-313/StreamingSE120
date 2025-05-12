@@ -79,7 +79,8 @@ public class User {
             }
             if (userFound == false) {
 
-                //write/add the user into the file, true refers to append mode, allowing text to be added at the end of the file instead of overwriting
+                //write/add the user into the file, true refers to append mode,
+                //allowing text to be added at the end of the file instead of overwriting
                 FileWriter userWriter = new FileWriter(usersFile, true);
                 //BufferedWriter improves FileWriter by allowing it to collect mutliple characters and appending it
                 BufferedWriter userBufferedWriter = new BufferedWriter(userWriter);
@@ -87,19 +88,15 @@ public class User {
                 userBufferedWriter.write(this.userId + "," + this.email + "," + this.password);
                 userBufferedWriter.newLine();
                 userBufferedWriter.close();
-
             }
         } catch (IOException read) {
             System.out.print("error1");
-        }
-        
+        }    
     }  
 
     public static List<User> loadUsers() {
         //creates the arrayList
         List<User> users = new ArrayList<>();
-        
-        
         try {
             String line;
             
@@ -114,8 +111,6 @@ public class User {
             BufferedReader userBufferedReader = new BufferedReader(new FileReader(fileObject
             
             ));
-            userBufferedReader.close();
-            
             //set the string line to hold each line it the file, then before readline is null
             while ((line = userBufferedReader.readLine()) != null) {
                 //we seperate the data by the , we used earlier to differentiate the data field
@@ -129,7 +124,7 @@ public class User {
                     users.add(user);
                 }
             }
-
+            userBufferedReader.close();
         } catch (IOException lbl) {
             System.out.print("lbl error");
         }

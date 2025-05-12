@@ -3,6 +3,8 @@ package mainstreamingplatform;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
@@ -40,9 +42,14 @@ public class StreamingServiceGUI extends Application {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize(URL url, ResourceBundle rb) {
 
-        greeting.setText("Welcome " + (UserGUI.getUser().getUserId()));
+        User currentUser = UserGUI.getUser();
+        if (currentUser != null) {
+        greeting.setText("Welcome " + currentUser.getUserId());
+        }
+    
+    createContent();
 
         createContent();
 
@@ -174,11 +181,11 @@ public class StreamingServiceGUI extends Application {
 
     private void adminMovieMenuScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminMovieMenuFXML.fxml"));
-        Parent streamingRoot = loader.load();
-        Scene streamingScene = new Scene(streamingRoot);
+        Parent movieRoot = loader.load();
+        Scene movieScene = new Scene(movieRoot);
 
         Stage stage = (Stage) search.getScene().getWindow();
-        stage.setScene(streamingScene);
+        stage.setScene(movieScene);
         stage.setTitle("AdminMenu");
         stage.show();
     }

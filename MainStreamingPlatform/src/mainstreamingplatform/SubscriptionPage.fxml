@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainstreamingplatform.SubscriptionClass">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainstreamingplatform.SubscriptionClass2">
    <children>
       <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="773.0" prefWidth="1027.0">
          <children>
@@ -39,7 +39,7 @@
                                     <Font size="24.0" />
                                  </font>
                               </Text>
-                              <Button layoutX="43.0" layoutY="370.0" mnemonicParsing="false" style="-fx-background-color: #3ae643;" text="Choose Plan" textFill="WHITE" />
+                              <Button fx:id="moderateButton" layoutX="43.0" layoutY="370.0" mnemonicParsing="false" style="-fx-background-color: #3ae643;" text="Choose Plan" textFill="WHITE" />
                            </children>
                         </Pane>
                         <Pane layoutX="594.0" layoutY="164.0" prefHeight="430.0" prefWidth="165.0" style="-fx-background-color: #465058;">
@@ -60,7 +60,7 @@
                                     <Font size="24.0" />
                                  </font>
                               </Text>
-                              <Button layoutX="41.0" layoutY="369.0" mnemonicParsing="false" style="-fx-background-color: #3ae643;" text="Choose Plan" textFill="WHITE" />
+                              <Button fx:id="advancedButton" layoutX="41.0" layoutY="369.0" mnemonicParsing="false" style="-fx-background-color: #3ae643;" text="Choose Plan" textFill="WHITE" />
                            </children>
                         </Pane>
                         <Pane layoutX="264.0" layoutY="164.0" prefHeight="430.0" prefWidth="165.0" style="-fx-background-color: #465058;">
@@ -81,7 +81,7 @@
                                     <Font size="24.0" />
                                  </font>
                               </Text>
-                              <Button layoutX="42.0" layoutY="371.0" mnemonicParsing="false" style="-fx-background-color: #3ae643;" text="Choose Plan" textFill="WHITE" />
+                              <Button fx:id="basicButton" layoutX="42.0" layoutY="371.0" mnemonicParsing="false" style="-fx-background-color: #3ae643;" text="Choose Plan" textFill="WHITE" />
                            </children>
                         </Pane>
                         <Pane layoutX="59.0" layoutY="164.0" prefHeight="430.0" prefWidth="205.0" style="-fx-background-color: #465058;">

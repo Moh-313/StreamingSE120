@@ -32,7 +32,7 @@ public class UserGUI extends Application {
     @FXML
     private Button SignInButton, loginbutton;//Button
     
-    private User currentUser; //Create an object of the User class
+    private static User currentUser; //Create an object of the User class
 
     //Method that is called when you launch()
     @Override
@@ -67,6 +67,15 @@ public class UserGUI extends Application {
         String Email = emailField.getText();
         String Password = passwordField.getText();
         
+        if (userIdField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            displayMessage("Please fill in all the fields.");
+            return;
+        }
+        
+        //Create a new User object with the inputted fields and set Loggedin() as true
+        currentUser = new User(UserId, Email, Password);
+        currentUser.saveUser();
+        currentUser.setLoggedIn(true);
         
         try {
             //Loads the new FXML page and creates an instance so you can access the controller
@@ -74,7 +83,7 @@ public class UserGUI extends Application {
             Parent subscriptionParent = subscriptionLoader.load();
             
             //Fimd the controlller for the FXML file (SubscriptionClass)
-            SubscriptionClass subscriptionClass = subscriptionLoader.getController();
+            SubscriptionClass2 subscriptionClass = subscriptionLoader.getController();
             
             //Carries the user information over to the next page
             subscriptionClass.setUser(currentUser);
@@ -146,7 +155,7 @@ public class UserGUI extends Application {
         alert.showAndWait();
     }
 
-    public User getUser() {
+    public static User getUser() {
         return currentUser;
     }
 

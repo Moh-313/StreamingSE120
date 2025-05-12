@@ -3,6 +3,7 @@ package mainstreamingplatform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.util.Random;
+import java.util.ResourceBundle;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.input.Dragboard;
@@ -42,7 +44,7 @@ public class AdminMovieMenuGUI extends Application {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize(URL url, ResourceBundle rb) {
 
         addButton.setOnAction(event -> {
             new Movie(randomId(), title.getText(), 0, director.getText(), cast.getText());

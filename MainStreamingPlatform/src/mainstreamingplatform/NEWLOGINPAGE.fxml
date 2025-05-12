@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="773.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainstreamingplatform.LogincClass">
+   <children>
+      <AnchorPane layoutX="-48.0" layoutY="-8.0" prefHeight="840.0" prefWidth="1514.0" style="-fx-background-color: #2A363F;">
+         <children>
+            <Pane layoutX="193.0" layoutY="156.0" prefHeight="559.0" prefWidth="593.0" style="-fx-background-color: #26323A;">
+               <children>
+                  <Text fill="#3ae643" layoutX="272.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MLP" wrappingWidth="186.13671875">
+                     <font>
+                        <Font name="AGA Arabesque" size="96.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#948383" layoutX="167.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movie LiveStream Player">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Circle fill="#3ae643" layoutX="196.0" layoutY="105.0" radius="34.0" stroke="#3ae643" strokeType="INSIDE" />
+                  <Circle fill="#3ae643" layoutX="196.0" layoutY="186.0" opacity="0.4" radius="34.0" stroke="#3ae643" strokeType="INSIDE" />
+                  <Circle fill="#3ae643" layoutX="117.0" layoutY="105.0" radius="34.0" stroke="#3ae643" strokeType="INSIDE" />
+                  <Circle fill="#3ae643" layoutX="117.0" layoutY="186.0" opacity="0.4" radius="34.0" stroke="#3ae643" strokeType="INSIDE" />
+               </children>
+            </Pane>
+            <Line endX="5.0" endY="361.0" layoutX="863.0" layoutY="342.0" startX="5.0" startY="-175.5" stroke="#465058" />
+            <TextField fx:id="userIdField" layoutX="990.0" layoutY="334.0" prefHeight="70.0" prefWidth="300.0" promptText="UserId" style="-fx-background-color: #2A363F; -fx-border-color: #465058;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="passwordField" layoutX="990.0" layoutY="444.0" prefHeight="70.0" prefWidth="300.0" promptText="Password" style="-fx-background-color: #2A363F v; -fx-border-color: #465058;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="logInButton" layoutX="990.0" layoutY="557.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="300.0" style="-fx-background-color: #6ED9A0;" text="Log In" textFill="#fbfcfc">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="signinbutton" layoutX="1150.0" layoutY="656.0" mnemonicParsing="false" style="-fx-background-color: #2A363F;" text="New here? Sign In" textFill="#525f68">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Text fill="#3ae643" layoutX="1019.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back!">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
