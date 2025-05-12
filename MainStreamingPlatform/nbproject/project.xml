@@ -5,6 +5,8 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>MainStreamingPlatform</name>
             <source-roots>
+                <root id="src.Images.dir"/>
+                <root id="src.Videos.dir"/>
                 <root id="src.dir"/>
             </source-roots>
             <test-roots>
