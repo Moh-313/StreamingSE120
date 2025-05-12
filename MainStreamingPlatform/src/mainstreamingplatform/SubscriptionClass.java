@@ -8,9 +8,9 @@ import java.util.ResourceBundle;
 public class SubscriptionClass implements Initializable {
     
     private User currentUserSC;
-    
+          
     public void initialize(URL url, ResourceBundle rb){
-        
+
     }
     
     public void setUser(User currentUserSC){

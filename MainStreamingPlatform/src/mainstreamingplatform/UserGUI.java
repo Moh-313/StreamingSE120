@@ -30,7 +30,7 @@ public class UserGUI extends Application {
     private PasswordField passwordField; //Allows the password to be hidden when entered
     
     @FXML
-    private Button loginButton;//Button
+    private Button SignInButton, loginbutton;//Button
     
     private User currentUser; //Create an object of the User class
 
@@ -40,17 +40,19 @@ public class UserGUI extends Application {
         
         //Needs to be in a try catch block incase the FXML file is'nt found
         try {
-            Parent loginmenu = FXMLLoader.load(getClass().getResource("LoginFXML.fxml")); //Opens the FXML scenbuilder file
+            Parent loginParent = FXMLLoader.load(getClass().getResource("LoginFXML.fxml")); //Opens the FXML scenbuilder file
             
-            //Create the scene (main page)
-            Scene loginScene = new Scene(loginmenu);
-            loginStage.setTitle("Login Page");
+            //Create the scene (Container that hold the UI)
+            Scene loginScene = new Scene(loginParent);
+            
+            //Create the stage that hold your scene
+            loginStage.setTitle("SignUp Page");
             loginStage.setScene(loginScene);
             loginStage.show();
             
             
         } catch (Exception e) {
-            e.printStackTrace();
+            ;
         }
     }
     
@@ -58,41 +60,54 @@ public class UserGUI extends Application {
     public void initialize(){
         
         //Decalres what happens when you click the button
-        loginButton.setOnAction(event ->{
+        SignInButton.setOnAction(event ->{
         
-            //Gets what the user inputs and saves it
+        //Gets what the user inputs and saves it
         String UserId = userIdField.getText();
         String Email = emailField.getText();
         String Password = passwordField.getText();
         
-        this.currentUser = new User(UserId, Email, Password); //Create an object with what the user enetered
         
         try {
-            
+            //Loads the new FXML page and creates an instance so you can access the controller
             FXMLLoader subscriptionLoader = new FXMLLoader(getClass().getResource("SubscriptionPage.fxml"));
             Parent subscriptionParent = subscriptionLoader.load();
+            
+            //Fimd the controlller for the FXML file (SubscriptionClass)
             SubscriptionClass subscriptionClass = subscriptionLoader.getController();
             
-            if (subscriptionClass == null) {
-            displayMessage("Error: Could not get controller for subscription page");
-            return;
-        }
+            //Carries the user information over to the next page
             subscriptionClass.setUser(currentUser);
             
-            Stage subscriptionStage = (Stage) loginButton.getScene().getWindow();
+            //Create a new stage and scene, pass the parent with the FXML file to the scene, and then pass the scene to the stage
+            Stage subscriptionStage = (Stage) SignInButton.getScene().getWindow();
             Scene subscriptionScene = new Scene(subscriptionParent);
             subscriptionStage.setScene(subscriptionScene);
         } 
         
         catch (Exception e) {
-            e.printStackTrace();
+            ;
         }
         //displayMessage("hello");
         
     });
         
-        //Glow effect when u click the textfield
-        emailField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+    loginbutton.setOnAction(event -> {
+        try {
+            FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("NEWLoginpage.fxml"));
+            Parent loginParent = loginLoader.load();
+        
+            Stage loginStage = (Stage) loginbutton.getScene().getWindow();
+            Scene loginScene = new Scene(loginParent);
+            loginStage.setScene(loginScene);
+    }catch (Exception e) {
+        ;
+    }
+    });
+
+        
+    //Glow effect when u click the textfield
+    emailField.focusedProperty().addListener((observable, oldValue, newValue) -> {
         if (newValue) { 
             emailField.setStyle("-fx-background-color: #2A363F; -fx-border-color: lightgreen; -fx-text-fill: white;");
         } else { 
@@ -117,7 +132,7 @@ public class UserGUI extends Application {
     });
     
     //Makes it so if doesn't hover a textfield automatically on start, and waits for you to click it
-     Platform.runLater(() -> {
+    Platform.runLater(() -> {
         userIdField.getParent().requestFocus();
     });
     

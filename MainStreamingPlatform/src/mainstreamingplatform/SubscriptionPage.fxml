@@ -34,9 +34,6 @@
                                  </font>
                               </Text>
                               <Line endX="26.5" layoutX="119.0" layoutY="74.0" startX="-100.0" />
-                              <Circle fill="#3ae643" layoutX="82.0" layoutY="122.0" opacity="0.54" radius="16.0" stroke="#3ce544" strokeType="INSIDE" />
-                              <Circle fill="#cd1919" layoutX="83.0" layoutY="185.0" opacity="0.54" radius="16.0" stroke="#b92b1e" strokeType="INSIDE" />
-                              <Circle fill="#3ae643" layoutX="83.0" layoutY="256.0" opacity="0.54" radius="16.0" stroke="#3ae643" strokeType="INSIDE" />
                               <Text fill="#3ce544" layoutX="78.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
                                  <font>
                                     <Font size="24.0" />
@@ -58,9 +55,6 @@
                                  </font>
                               </Text>
                               <Line endX="26.5" layoutX="119.0" layoutY="74.0" startX="-100.0" />
-                              <Circle fill="#3ae643" layoutX="82.0" layoutY="120.0" opacity="0.54" radius="16.0" stroke="#3ae643" strokeType="INSIDE" />
-                              <Circle fill="#3ae643" layoutX="82.0" layoutY="186.0" opacity="0.54" radius="16.0" stroke="#3ae643" strokeType="INSIDE" />
-                              <Circle fill="#3ae643" layoutX="83.0" layoutY="254.0" opacity="0.54" radius="16.0" stroke="#3ae643" strokeType="INSIDE" />
                               <Text fill="#3ce544" layoutX="77.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
                                  <font>
                                     <Font size="24.0" />
@@ -82,9 +76,6 @@
                                  </font>
                               </Text>
                               <Line endX="26.5" layoutX="119.0" layoutY="76.0" startX="-100.0" />
-                              <Circle fill="#cd1919" layoutX="82.0" layoutY="121.0" opacity="0.54" radius="16.0" stroke="#b92b1e" strokeType="INSIDE" />
-                              <Circle fill="#cd1919" layoutX="83.0" layoutY="185.0" opacity="0.54" radius="16.0" stroke="#b92b1e" strokeType="INSIDE" />
-                              <Circle fill="#cd1919" layoutX="82.0" layoutY="257.0" opacity="0.54" radius="16.0" stroke="#b92b1e" strokeType="INSIDE" />
                               <Text fill="#3ce544" layoutX="77.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
                                  <font>
                                     <Font size="24.0" />
