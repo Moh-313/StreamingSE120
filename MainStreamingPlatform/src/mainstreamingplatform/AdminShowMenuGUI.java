@@ -20,21 +20,22 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
+// this file is not finished and lacks full functionality
 public class AdminShowMenuGUI extends Application {
 
     @FXML
-    private Button backButton, addButton, episodesButton; 
+    private Button backButton, addButton, episodesButton; // the buttons 
 
     @FXML
-    private TextField title, seasons, director, cast, genericTextField;
+    private TextField title, seasons, director, cast, genericTextField; // the text fields
 
     @FXML
-    private ImageView image;
+    private ImageView image; // where the image is held and displayed
 
     @FXML
-    private VBox seasonsNumber;
+    private VBox seasonsNumber; // VBox that the seasons episode number container are created in
 
-    private final File imageFile = new File("Images/");
+    private final File imageFile = new File("Images/");  // the file the images are saved too
 
     @FXML
     public void start(Stage primaryStage) {
@@ -43,17 +44,23 @@ public class AdminShowMenuGUI extends Application {
 
     @FXML
     public void initialize() {
-        
+        // TODO
         episodesButton.setOnAction(event -> {
             
             
         });
 
+        // loads the streaming service when pressed
         backButton.setOnAction(event -> {
             streamingServiceScene();
 
         });
-
+        
+        
+        // creats a event when dragged over
+        // checks if the thing draged over is a file 
+        // and is not dragged from the imageviewer container
+        // and creats a copy if both conditions are meet
         image.setOnDragOver(event -> {
             if (event.getGestureSource() != image
                     && event.getDragboard().hasFiles()) {
@@ -62,6 +69,11 @@ public class AdminShowMenuGUI extends Application {
             event.consume();
         });
 
+          
+        // creats a event when the file is droped
+        // gets the drag board from the event
+        // checks if it has files if true gets the first file convert it to image 
+        // and then sets the image for the image viewer then saves the image
         image.setOnDragDropped(event -> {
             Dragboard board = event.getDragboard();
 
@@ -74,7 +86,11 @@ public class AdminShowMenuGUI extends Application {
 
             }
         });
-
+        
+        // clears the seasonsNumber container 
+        // checks the number entered in the text file
+        // converts it to a int from String
+        // then uses a for loop to create and add containers to seasonNumber
         seasons.textProperty().addListener((observable, oldValue, newValue) -> {
             seasonsNumber.getChildren().clear();
 
@@ -89,7 +105,9 @@ public class AdminShowMenuGUI extends Application {
         });
 
     }
-
+    
+    // saves the image inside a "Images" folder in the project 
+    // By making a buffered image and then writing it inside a "Images" file with the title name
     public void saveImageToFile(Image image, File file) {
         try {
             File movieFile = new File(imageFile, title.getText());
@@ -100,7 +118,8 @@ public class AdminShowMenuGUI extends Application {
             e.printStackTrace();
         }
     }
-
+    // creats a container using the properties of the generic container
+    // appends the number to the end of the text inside it 
     public TextField createContainer(int number) {
 
         TextField textField = new TextField();
@@ -115,7 +134,7 @@ public class AdminShowMenuGUI extends Application {
 
         return textField;
     }
-    
+    // Loads the streaming service menu
     public void streamingServiceScene() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("StreamingServiceFXML.fxml"));

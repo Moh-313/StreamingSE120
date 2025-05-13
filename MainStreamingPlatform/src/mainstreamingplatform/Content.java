@@ -14,12 +14,14 @@ public abstract class Content extends StreamingService {
 
     }
 
-
+    // prints playing content
     public void play(){
+        System.out.println("playing content");
 
     }
-
+    // prints pasuging content
     public void pause(){
+        System.out.println("pausing content");
 
     }
 
