@@ -42,14 +42,15 @@ public class StreamingServiceGUI extends Application {
     }
 
     @FXML
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize() {
+         System.out.println("✅ StreamingServiceGUI initialized");
 
         User currentUser = UserGUI.getUser();
         if (currentUser != null) {
         greeting.setText("Welcome " + currentUser.getUserId());
         }
     
-    createContent();
+       
 
         createContent();
 
@@ -77,10 +78,7 @@ public class StreamingServiceGUI extends Application {
 
     }
 
-    public static void launchGUI(String[] args) {
-        launch(args);
-
-    }
+   
     
     // two over loaded methods that creat Cards for there respective containers
     // by making and an empry VBox 

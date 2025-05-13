@@ -44,7 +44,7 @@ public class AdminMovieMenuGUI extends Application {
     }
 
     @FXML
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize() {
 
         addButton.setOnAction(event -> {
             new Movie(randomId(), title.getText(), 0, director.getText(), cast.getText());

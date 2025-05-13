@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
 public class AdminShowMenuGUI extends Application {
 
     @FXML
-    private Button backButton, addButton, episodesButton;
+    private Button backButton, addButton, episodesButton; 
 
     @FXML
     private TextField title, seasons, director, cast, genericTextField;
