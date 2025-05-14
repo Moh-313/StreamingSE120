@@ -32,11 +32,6 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <Text fill="#6ed9a0" layoutX="57.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shows" wrappingWidth="184.13672637939453">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-      </Text>
       <AnchorPane focusTraversable="true" layoutX="4.0" layoutY="536.0" prefHeight="304.0" prefWidth="1514.0">
          <children>
             <ScrollPane fx:id="scrollShows" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" layoutX="-1.0" layoutY="-16.0" pannable="true" prefHeight="282.0" prefWidth="1514.0" style="-fx-background-color: transparent; -fx-background: transparent;" vbarPolicy="NEVER">
