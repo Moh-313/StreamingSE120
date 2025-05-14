@@ -11,7 +11,7 @@
    <children>
       <AnchorPane focusTraversable="true" prefHeight="125.0" prefWidth="1517.0" style="-fx-background-color: #26323A;">
          <children>
-            <TextField fx:id="search" layoutX="731.0" layoutY="35.0" prefHeight="62.0" prefWidth="765.0" promptText="Search" style="-fx-text-fill: white; -fx-border-color: #465058; -fx-background-color: transparent;">
+            <TextField fx:id="search" layoutX="731.0" layoutY="35.0" prefHeight="62.0" prefWidth="619.0" promptText="Search" style="-fx-text-fill: white; -fx-border-color: #465058; -fx-background-color: transparent;">
                <font>
                   <Font size="27.0" />
                </font>

@@ -58,6 +58,7 @@ public class LogincClass implements Initializable {
                 
             //Create a new user
             currentUser = new User();
+            currentUser.login(userId,password);
             if(currentUser.login(userId,password)){
                //Turn him into a subscriber by creating a subscriber object of him
                 Subscriber currentSubscriber = new Subscriber(currentUser);
