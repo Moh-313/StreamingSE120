@@ -3,7 +3,6 @@ package mainstreamingplatform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -16,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.util.Random;
-import java.util.ResourceBundle;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.input.Dragboard;
@@ -26,17 +24,17 @@ import javax.imageio.ImageIO;
 public class AdminMovieMenuGUI extends Application {
 
     @FXML
-    private Button backButton, addButton;
+    private Button backButton, addButton; // buttons
 
     @FXML
-    private TextField title, videoFiled, director, cast;
+    private TextField title, videoFiled, director, cast; // the text field 
 
     @FXML
-    private ImageView image;
+    private ImageView image; // where the image is held and displayed
 
-    private final File imageFile = new File("Images/");
+    private final File imageFile = new File("Images/"); // the file the images are saved too
 
-    private final File videoFile = new File("Videos/");
+    private final File videoFile = new File("Videos/"); // the file the video are save too
 
     @FXML
     public void start(Stage primaryStage) {
@@ -44,8 +42,12 @@ public class AdminMovieMenuGUI extends Application {
     }
 
     @FXML
-    public void initialize(URL url, ResourceBundle rb) {
-
+    public void initialize() {
+        
+        // when clicking add it creats a movie object 
+        // display a message "Added succesfully"
+        // saves the video with the file path entered
+        // clear all the container
         addButton.setOnAction(event -> {
             new Movie(randomId(), title.getText(), 0, director.getText(), cast.getText());
             displayMessage("Added succesfully");
@@ -53,11 +55,16 @@ public class AdminMovieMenuGUI extends Application {
             clearAll();
 
         });
-
+        
+        // when the back button is clicked it opens the streaming service
         backButton.setOnAction(event -> {
             streamingServiceScene();
         });
 
+        // creats a event when dragged over
+        // checks if the thing draged over is a file 
+        // and is not dragged from the imageviewer container
+        // and creats a copy if both conditions are meet
         image.setOnDragOver(event -> {
             if (event.getGestureSource() != image
                     && event.getDragboard().hasFiles()) {
@@ -65,7 +72,11 @@ public class AdminMovieMenuGUI extends Application {
             }
             event.consume();
         });
-
+        
+        // creats a event when the file is droped
+        // gets the drag board from the event
+        // checks if it has files if true gets the first file convert it to image 
+        // and then sets the image for the image viewer then saves the image
         image.setOnDragDropped(event -> {
             Dragboard board = event.getDragboard();
 
@@ -80,19 +91,22 @@ public class AdminMovieMenuGUI extends Application {
         });
 
     }
-
+    // displays a message with the string passed to it
     public void displayMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
+    
+    // Creats a randomId for the movie between 0 - 9000000(excluding) 
     public String randomId() {
         Random random = new Random();
         return "" + random.nextInt(9000000);
     }
-
+    
+    // saves the image inside a "Images" folder in the project 
+    // By making a buffered image and then writing it inside a "Images" file with the title name
     public void saveImageToFile(Image image, File file) {
         try {
             File movieFile = new File(imageFile, title.getText());
@@ -103,7 +117,10 @@ public class AdminMovieMenuGUI extends Application {
             e.printStackTrace();
         }
     }
-
+    
+    // saves the video to a file names "Videos" 
+    // by copying the video from the entered file path and
+    // then saves it to  a "Videos" folder in the project 
     public void saveVideoToFile(String videoPath) {
 
         try {
@@ -117,7 +134,7 @@ public class AdminMovieMenuGUI extends Application {
             exception.printStackTrace();
         }
     }
-
+    // Clears all the containers on adding
     public void clearAll() {
         title.clear();
         director.clear();
@@ -126,7 +143,7 @@ public class AdminMovieMenuGUI extends Application {
         image.setImage(null);
 
     }
-
+    // loads the streaming service 
     public void streamingServiceScene() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("StreamingServiceFXML.fxml"));

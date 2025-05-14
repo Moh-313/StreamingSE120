@@ -24,35 +24,39 @@ import javafx.scene.paint.Color;
 public class StreamingServiceGUI extends Application {
 
     @FXML
-    private TextField search;
+    private TextField search; // the search Text Field
 
     @FXML
-    private ScrollPane scrollMovies, scrollShows;
+    private ScrollPane scrollMovies, scrollShows; // the scroll Panel for the shows / movies
 
     @FXML
-    private HBox movieContainer, showContainer;
+    private HBox movieContainer, showContainer; // the container for the movies and shows
 
     @FXML
-    private Text greeting;
+    private Text greeting;  // the text on the top left
 
-    private File imageFolder = new File("images/");
+    private File imageFolder = new File("images/"); // the folder the images are saved too
 
     public void start(Stage primaryStage) {
 
     }
 
     @FXML
-    public void initialize(URL url, ResourceBundle rb) {
-
+    public void initialize() {
+        
+        // checks and gets the current user 
         User currentUser = UserGUI.getUser();
         if (currentUser != null) {
-        greeting.setText("Welcome " + currentUser.getUserId());
+            
+            // sets the text on the top left
+            greeting.setText("Welcome " + currentUser.getUserId());
         }
     
-    createContent();
+       
 
         createContent();
-
+        
+         // sets the border of the search when foucesed 
         search.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 this.search.setStyle("-fx-background-color: #2A363F; -fx-border-color: lightgreen; -fx-text-fill: white;");
@@ -60,12 +64,13 @@ public class StreamingServiceGUI extends Application {
                 this.search.setStyle("-fx-background-color: #2A363F; -fx-border-color:  #465058; -fx-text-fill: black;");
             }
         });
-
+        
+        // check the text entered in the text field through the listner component
         search.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
-                if (newValue.contains("AdminMovieMenu")) {
+                if (newValue.contains("AdminMovieMenu")) { //checks the String in the search box
                     adminMovieMenuScene();
-                } else if (newValue.contains("AdminShowMenu")) {
+                } else if (newValue.contains("AdminShowMenu")) { //checks the String in the search box
                     adminShowMenuScene();
                 } else {
                     filterContent(newValue);
@@ -77,13 +82,10 @@ public class StreamingServiceGUI extends Application {
 
     }
 
-    public static void launchGUI(String[] args) {
-        launch(args);
-
-    }
+   
     
     // two over loaded methods that creat Cards for there respective containers
-    // by making and an empry VBox 
+    // by making an empty VBox calling getImage() and setting the title of the container to the movie/series
     public VBox createCard(Movie movie) throws NullPointerException {
 
         VBox card = new VBox();
@@ -116,7 +118,7 @@ public class StreamingServiceGUI extends Application {
         return card;
     }
     
-    // clear the containers and the creates content based on the list returned from searchContent(title) 
+    // clear the containers and then creates content based on the list returned from searchContent(title) 
     // called on initialize in search.textProperty.addlistener 
     private void filterContent(String title) {
         movieContainer.getChildren().clear();
@@ -178,7 +180,8 @@ public class StreamingServiceGUI extends Application {
         }
 
     }
-
+    
+    // loads the adminMovieMenuScene
     private void adminMovieMenuScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminMovieMenuFXML.fxml"));
         Parent movieRoot = loader.load();
@@ -189,7 +192,8 @@ public class StreamingServiceGUI extends Application {
         stage.setTitle("AdminMenu");
         stage.show();
     }
-
+    
+    // Loads the adminShowMenuScene
     private void adminShowMenuScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminShowMenuFXML.fxml"));
         Parent streamingRoot = loader.load();

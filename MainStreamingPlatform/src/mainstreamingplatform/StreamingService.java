@@ -28,8 +28,15 @@ public class StreamingService {
     
    
 
-
+    // searchs through the content and checks the Ids
+    // if it matches print "Streaming: " + (movie/show title)
     public static void streamContent(String contentId){
+        for (Content content : catalog){
+            if(contentId.contains(contentId)){
+                System.out.println("Streaming: " + content.getTitle());
+            }
+            
+        }
         
 
     }

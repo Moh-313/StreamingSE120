@@ -73,8 +73,9 @@ public class LogincClass implements Initializable {
                 stage.setScene(streamingScene);
                 stage.setTitle("Welcome to MainStreaming");
                 stage.show();
+                
             } catch(Exception e) {
-                ;
+                e.printStackTrace();
             }
             }
             else{
