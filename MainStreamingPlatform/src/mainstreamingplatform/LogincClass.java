@@ -40,7 +40,7 @@ public class LogincClass implements Initializable {
     @FXML
     private Button logInButton, signinbutton;//Buttons
 
-    private User currentUser;
+    private static User currentUser;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,7 +122,11 @@ public class LogincClass implements Initializable {
         });
 
     }
-
+    
+    public static User getUser() {
+        return currentUser;
+    }
+    
     public void displayMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
