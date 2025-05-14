@@ -46,11 +46,20 @@ public class StreamingServiceGUI extends Application {
         
         // checks and gets the current user 
         User currentUser = UserGUI.getUser();
+        
         if (currentUser != null) {
             
             // sets the text on the top left
             greeting.setText("Welcome " + currentUser.getUserId());
         }
+        else{
+            // if the user is null we get the user from the login class 
+            // and then set the text
+            currentUser = LogincClass.getUser();
+            greeting.setText("Welcome " + currentUser.getUserId());
+        }
+        
+        
     
        
 

@@ -27,7 +27,7 @@ public class AdminMovieMenuGUI extends Application {
     private Button backButton, addButton; // buttons
 
     @FXML
-    private TextField title, videoFiled, director, cast; // the text field 
+    private TextField title, videoFiled, director, cast, duration; // the text field 
 
     @FXML
     private ImageView image; // where the image is held and displayed
@@ -49,7 +49,7 @@ public class AdminMovieMenuGUI extends Application {
         // saves the video with the file path entered
         // clear all the container
         addButton.setOnAction(event -> {
-            new Movie(randomId(), title.getText(), 0, director.getText(), cast.getText());
+            new Movie(randomId(), title.getText(), Integer.parseInt(duration.getText()), director.getText(), cast.getText());
             displayMessage("Added succesfully");
             saveVideoToFile(videoFiled.getText());
             clearAll();
@@ -154,5 +154,10 @@ public class AdminMovieMenuGUI extends Application {
             exception.printStackTrace();
         }
     }
+    
+    // splits the cast by the , seprator 
+    public String[] splitCast(String cast){
+        return cast.split(",");
+    } 
 
 }

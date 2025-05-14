@@ -41,16 +41,21 @@
                   <Font size="30.0" />
                </font>
             </TextField>
-            <TextField fx:id="cast" layoutX="81.0" layoutY="301.0" prefHeight="68.0" prefWidth="630.0" promptText="Cast" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-text-fill: white;">
+            <TextField fx:id="cast" layoutX="81.0" layoutY="301.0" prefHeight="68.0" prefWidth="630.0" promptText="Cast (Split by &quot;,&quot;)" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-text-fill: white;">
                <font>
                   <Font size="30.0" />
                </font>
             </TextField>
-            <Button fx:id="addButton" layoutX="80.0" layoutY="431.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="252.0" style="-fx-background-color: #6ED9A0;" text="Add" textFill="#fbfcfc">
+            <Button fx:id="addButton" layoutX="80.0" layoutY="485.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="252.0" style="-fx-background-color: #6ED9A0;" text="Add" textFill="#fbfcfc">
                <font>
                   <Font size="36.0" />
                </font>
             </Button>
+            <TextField fx:id="duration" layoutX="80.0" layoutY="390.0" prefHeight="68.0" prefWidth="630.0" promptText="duration" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-text-fill: white;">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
    </children>
