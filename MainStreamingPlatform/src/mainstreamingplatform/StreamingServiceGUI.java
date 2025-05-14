@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -43,29 +44,24 @@ public class StreamingServiceGUI extends Application {
 
     @FXML
     public void initialize() {
-        
+
         // checks and gets the current user 
         User currentUser = UserGUI.getUser();
-        
+
         if (currentUser != null) {
-            
+
             // sets the text on the top left
             greeting.setText("Welcome " + currentUser.getUserId());
-        }
-        else{
+        } else {
             // if the user is null we get the user from the login class 
             // and then set the text
             currentUser = LogincClass.getUser();
             greeting.setText("Welcome " + currentUser.getUserId());
         }
-        
-        
-    
-       
 
         createContent();
-        
-         // sets the border of the search when foucesed 
+
+        // sets the border of the search when foucesed 
         search.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 this.search.setStyle("-fx-background-color: #2A363F; -fx-border-color: lightgreen; -fx-text-fill: white;");
@@ -73,7 +69,7 @@ public class StreamingServiceGUI extends Application {
                 this.search.setStyle("-fx-background-color: #2A363F; -fx-border-color:  #465058; -fx-text-fill: black;");
             }
         });
-        
+
         // check the text entered in the text field through the listner component
         search.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
@@ -91,8 +87,6 @@ public class StreamingServiceGUI extends Application {
 
     }
 
-   
-    
     // two over loaded methods that creat Cards for there respective containers
     // by making an empty VBox calling getImage() and setting the title of the container to the movie/series
     public VBox createCard(Movie movie) throws NullPointerException {
@@ -108,6 +102,25 @@ public class StreamingServiceGUI extends Application {
         title.setFill(Color.TRANSPARENT);
 
         card.getChildren().addAll(poster, title);
+
+        card.setOnMouseClicked(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MoviePlayer.fxml"));
+                Parent root = loader.load();
+
+                MoviePlayerController controller = loader.getController();
+                controller.setMovie(movie);
+                
+                 Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                primaryStage.setTitle("Movie Player Test");
+                primaryStage.setScene(new Scene(root));
+                primaryStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
+
         return card;
 
     }
@@ -126,7 +139,7 @@ public class StreamingServiceGUI extends Application {
         card.getChildren().addAll(poster, title);
         return card;
     }
-    
+
     // clear the containers and then creates content based on the list returned from searchContent(title) 
     // called on initialize in search.textProperty.addlistener 
     private void filterContent(String title) {
@@ -146,8 +159,7 @@ public class StreamingServiceGUI extends Application {
         }
 
     }
-    
-    
+
     // creates the cards inside the container by using the catalog
     // called on initialize
     private void createContent() {
@@ -166,7 +178,6 @@ public class StreamingServiceGUI extends Application {
 
         }
     }
-    
 
     // get the buffered image inside the "Images" folder 
     // checks if it matches "title" and then returns the image
@@ -189,7 +200,7 @@ public class StreamingServiceGUI extends Application {
         }
 
     }
-    
+
     // loads the adminMovieMenuScene
     private void adminMovieMenuScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminMovieMenuFXML.fxml"));
@@ -201,7 +212,7 @@ public class StreamingServiceGUI extends Application {
         stage.setTitle("AdminMenu");
         stage.show();
     }
-    
+
     // Loads the adminShowMenuScene
     private void adminShowMenuScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminShowMenuFXML.fxml"));

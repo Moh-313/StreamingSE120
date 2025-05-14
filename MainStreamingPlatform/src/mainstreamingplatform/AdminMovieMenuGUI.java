@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.List;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,19 +45,20 @@ public class AdminMovieMenuGUI extends Application {
 
     @FXML
     public void initialize() {
-        
+
         // when clicking add it creats a movie object 
         // display a message "Added succesfully"
         // saves the video with the file path entered
         // clear all the container
         addButton.setOnAction(event -> {
-            new Movie(randomId(), title.getText(), Integer.parseInt(duration.getText()), director.getText(), cast.getText());
+            new Movie(randomId(), title.getText(), Integer.parseInt(duration.getText()),
+                    director.getText(), splitCast(cast.getText()), videoFile.getName() + "/" + title.getText() + ".mp4" );
             displayMessage("Added succesfully");
             saveVideoToFile(videoFiled.getText());
             clearAll();
 
         });
-        
+
         // when the back button is clicked it opens the streaming service
         backButton.setOnAction(event -> {
             streamingServiceScene();
@@ -72,7 +75,7 @@ public class AdminMovieMenuGUI extends Application {
             }
             event.consume();
         });
-        
+
         // creats a event when the file is droped
         // gets the drag board from the event
         // checks if it has files if true gets the first file convert it to image 
@@ -91,6 +94,7 @@ public class AdminMovieMenuGUI extends Application {
         });
 
     }
+
     // displays a message with the string passed to it
     public void displayMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -98,13 +102,13 @@ public class AdminMovieMenuGUI extends Application {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    
+
     // Creats a randomId for the movie between 0 - 9000000(excluding) 
-    public String randomId() {
+    public static String randomId() {
         Random random = new Random();
         return "" + random.nextInt(9000000);
     }
-    
+
     // saves the image inside a "Images" folder in the project 
     // By making a buffered image and then writing it inside a "Images" file with the title name
     public void saveImageToFile(Image image, File file) {
@@ -117,7 +121,7 @@ public class AdminMovieMenuGUI extends Application {
             e.printStackTrace();
         }
     }
-    
+
     // saves the video to a file names "Videos" 
     // by copying the video from the entered file path and
     // then saves it to  a "Videos" folder in the project 
@@ -134,6 +138,7 @@ public class AdminMovieMenuGUI extends Application {
             exception.printStackTrace();
         }
     }
+
     // Clears all the containers on adding
     public void clearAll() {
         title.clear();
@@ -141,8 +146,10 @@ public class AdminMovieMenuGUI extends Application {
         cast.clear();
         videoFiled.clear();
         image.setImage(null);
+        duration.clear();
 
     }
+
     // loads the streaming service 
     public void streamingServiceScene() {
         try {
@@ -154,10 +161,10 @@ public class AdminMovieMenuGUI extends Application {
             exception.printStackTrace();
         }
     }
-    
+
     // splits the cast by the , seprator 
-    public String[] splitCast(String cast){
-        return cast.split(",");
-    } 
+    public List<String> splitCast(String cast) {
+        return Arrays.asList(cast.split(","));
+    }
 
 }
