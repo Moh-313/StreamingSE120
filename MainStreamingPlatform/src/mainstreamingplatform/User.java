@@ -14,7 +14,7 @@ public class User {
     //Creates a file in the package that stores the users
     public static final String usersFile = "usersFile.txt";
 
-    //No-argument Constructo
+    //No-argument Constructor
     public User() {
 
     }
@@ -145,6 +145,10 @@ public class User {
             }
         }
         return false;
+    }
+    
+    public void logout(){
+        this.loggedIn = false;
     }
 
 }
