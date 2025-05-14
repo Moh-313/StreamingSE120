@@ -14,6 +14,7 @@ import java.io.File;
 import java.util.List;
 
 public class MoviePlayerController {
+    // UI from the FXML
 
     @FXML
     private Label titleLabel;
@@ -40,34 +41,37 @@ public class MoviePlayerController {
     private Button exitButton;
 
     @FXML
-    private VBox infoBox;
+    private VBox infoBox; //Vbox that contains duration, cast, director
 
     @FXML
-    private Pane logoPane;
+    private Pane logoPane; //pane with logo inside it
 
     private MediaPlayer mediaPlayer;
 
+    //called when a movie is selected by the user, fills screen with movie info and loads video
     public void setMovie(Movie movie) {
         titleLabel.setText(movie.getTitle().toUpperCase());
         durationLabel.setText("Duration: " + movie.getDuration() + " minutes");
         directorLabel.setText("Director: " + movie.getDirector());
         castLabel.setText("Cast: " + String.join(", ", movie.getCast()));
-
+        
         String videoPath = new File(movie.getVideoPath()).toURI().toString();
         Media media = new Media(videoPath);
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
-
+        
+        //hide pause and exit at first and initializes video dimensions
         pauseButton.setVisible(false);
         exitButton.setVisible(false);
         mediaView.setFitWidth(600);
         mediaView.setFitHeight(300);
-
+        
+        //style the buttons to not have backgrounfd
         applyIconButtonStyle(playButton);
         applyIconButtonStyle(pauseButton);
         applyIconButtonStyle(exitButton);
     }
-
+    //make buttons transparent + hover effect
     private void applyIconButtonStyle(Button button) {
         button.setStyle(
             "-fx-background-color: transparent;" +
@@ -95,24 +99,28 @@ public class MoviePlayerController {
         ));
     }
 
+    //called when player clicks play
     @FXML
     private void handlePlay() {
         if (mediaPlayer != null) {
             MediaPlayer.Status status = mediaPlayer.getStatus();
-
+            //if already paused, just resume
             if (status == MediaPlayer.Status.PAUSED) {
                 mediaPlayer.play();
                 playButton.setVisible(false);
                 pauseButton.setVisible(true);
                 return;
             }
-
+            //start video for first time
             mediaPlayer.play();
+            
+            //hide all preview info and logo when video played
             infoBox.setVisible(false);
             titleLabel.setVisible(false);
             logoPane.setVisible(false);
             playButton.setVisible(false);
-
+            
+            //resize video to fill area
             Platform.runLater(() -> {
                 double width = mediaView.getParent().getLayoutBounds().getWidth();
                 double height = mediaView.getParent().getLayoutBounds().getHeight();
@@ -125,6 +133,7 @@ public class MoviePlayerController {
         }
     }
 
+    //called when user clicks pause (or clicks again to resume)
     @FXML
     private void handlePause() {
         if (mediaPlayer != null) {
@@ -142,17 +151,21 @@ public class MoviePlayerController {
         }
     }
 
+    
+    //called when user clicks to exist icon
     @FXML
     private void handleExit() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
-
+        
+        //shrink video back
         mediaView.fitWidthProperty().unbind();
         mediaView.fitHeightProperty().unbind();
         mediaView.setFitWidth(600);
         mediaView.setFitHeight(300);
 
+        //show all info again
         infoBox.setVisible(true);
         titleLabel.setVisible(true);
         logoPane.setVisible(true);
